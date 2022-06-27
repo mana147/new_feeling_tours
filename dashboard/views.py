@@ -1,11 +1,30 @@
 from django.shortcuts import render
+from django.template import loader
 from django.http import HttpResponse
+from .models import Post
+
+import json
+
+# -------------------------------------------------
 
 def index(request):
-    return HttpResponse("dashboard");
+    context = {}
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(context))
 
-def chat(request):
-    return render(request, 'chat.html')
+# -------------------------------------------------
 
-def chat_room(request, room_name):
-    return render(request, 'room.html', {"room_name": room_name})
+def list(request):
+    data = Post.objects.all().values()
+    # #convert to JSON string
+    return HttpResponse( data[0]);
+
+# -------------------------------------------------
+
+# data = Post.objects.all().values()
+# print(data)
+# data_list = list(data)
+# print(data_list)
+
+
+# print(">>>>>>>>>>>>>>>>>>>>>>>")
