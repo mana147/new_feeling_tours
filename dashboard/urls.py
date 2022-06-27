@@ -1,8 +1,8 @@
-from django.urls import path;
+from django.urls import path, re_path;
 from . import views;
 
 urlpatterns = [
-    path('', views.index),
-    path("list", views.list)
+    # re_path(r'^.*\.html', views.gentella_html, name='gentella'),
+    path('', views.index, name='index')
 ]
 
